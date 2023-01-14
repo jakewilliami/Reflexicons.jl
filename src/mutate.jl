@@ -19,7 +19,7 @@ function next!(R::Reflexicon)
     chars = Char.(take!(R.page_io))
     filter!(∈('a':'z'), chars)
     R.data = countmap(chars)
-    R.page_io = _write_out_page(R.data, infix = ' ', line_suffix = '\n')
+    R.page_io = _write_out_page(R.data)
     R.page += 1
 
     return R
