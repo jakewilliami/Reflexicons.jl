@@ -26,7 +26,7 @@ const _PAGE_BOARDER_CHARS = Dict{Symbol, Char}(
 )
 
 # Show current page
-function Base.show(io::IO, R::Reflexicon)
+function Base.show(io::IO, R::ReflexiconState)
     seekstart(R.page_io)
     lines = split(read(R.page_io, String), '\n')
     line_width = maximum(length, lines)
