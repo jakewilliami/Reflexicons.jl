@@ -19,15 +19,16 @@ const _PAGE_BOARDER_CHARS = Dict{Symbol, Char}(
     :top_right_corner => '┐',
     :bottom_left_corner => '└',
     :bottom_right_corner => '┘',
-    :column => '│',
-    :row => '─',
+    :edge_vertical => '│',
+    :edge_horizontal => '─',
     # :blank => '⋅',
     :blank => ' ',
 )
 
 # Show current page
 function Base.show(io::IO, R::Reflexicon)
-    lines = split(String(take!(copy(R.page_io))), '\n')
+    seekstart(R.page_io)
+    lines = split(read(R.page_io, String), '\n')
     line_width = maximum(length, lines)
     page_width = line_width + 4
 
@@ -39,19 +40,19 @@ function Base.show(io::IO, R::Reflexicon)
 
     # Print top boarder
     print(io, _PAGE_BOARDER_CHARS[:top_left_corner])
-    print(io, _PAGE_BOARDER_CHARS[:row] ^ (line_width + 2))
+    print(io, _PAGE_BOARDER_CHARS[:edge_horizontal] ^ (line_width + 2))
     println(io, _PAGE_BOARDER_CHARS[:top_right_corner])
 
     # Print page contents
     for line in lines
-        print(io, _PAGE_BOARDER_CHARS[:column], _PAGE_BOARDER_CHARS[:blank])
+        print(io, _PAGE_BOARDER_CHARS[:edge_vertical], _PAGE_BOARDER_CHARS[:blank])
         print(io, line)
         print(io, _PAGE_BOARDER_CHARS[:blank] ^ (line_width - length(line) + 1))  # right padding
-        println(io, _PAGE_BOARDER_CHARS[:column])
+        println(io, _PAGE_BOARDER_CHARS[:edge_vertical])
     end
 
     # Print bottom boarder
     print(io, _PAGE_BOARDER_CHARS[:bottom_left_corner])
-    print(io, _PAGE_BOARDER_CHARS[:row] ^ (line_width + 2))
+    print(io, _PAGE_BOARDER_CHARS[:edge_horizontal] ^ (line_width + 2))
     println(io, _PAGE_BOARDER_CHARS[:bottom_right_corner])
 end

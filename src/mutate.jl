@@ -16,10 +16,9 @@ end
 
 # Calculate next page in reflexicon
 function next!(R::Reflexicon)
-    chars = Char.(take!(R.page_io))
-    filter!(∈('a':'z'), chars)
-    R.data = countmap(chars)
     R.page_io = _write_out_page(R.data)
+    seekstart(R.page_io)
+    R.data = countmap(filter(∈(ALPHABET), read(R.page_io, String)))
     R.page += 1
 
     return R
