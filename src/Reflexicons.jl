@@ -3,12 +3,12 @@ module Reflexicons
 using SpelledOut
 using StatsBase
 
-export Reflexicon
+export ReflexiconState
 export copyto!, first!, next!
 
 const ALPHABET = 'a':'z'
 
-mutable struct Reflexicon
+mutable struct ReflexiconState
     start::String
     page_io::IO
     page::Int
@@ -16,12 +16,11 @@ mutable struct Reflexicon
 end
 
 
-function Reflexicon(start::String)
+function ReflexiconState(start::String)
     page_io = IOBuffer()
     print(page_io, start)
-    return Reflexicon(start, page_io, 1, countmap(start))
+    return ReflexiconState(start, page_io, 1, countmap(start))
 end
-
 
 include("show.jl")
 include("mutate.jl")

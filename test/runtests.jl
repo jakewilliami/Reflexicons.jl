@@ -2,7 +2,7 @@ using Reflexicons
 using Test
 
 @testset "Reflexicons.jl" begin
-    R = Reflexicon("x")
+    R = ReflexiconState("x")
 
     # Page 1
     @test R.start == "x"

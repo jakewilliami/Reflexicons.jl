@@ -1,5 +1,5 @@
 # Update dest with fields from src
-function Base.copyto!(dest::Reflexicon, src::Reflexicon)
+function Base.copyto!(dest::ReflexiconState, src::ReflexiconState)
     dest.start = src.start
     dest.page_io = src.page_io
     dest.page = src.page
@@ -8,14 +8,14 @@ function Base.copyto!(dest::Reflexicon, src::Reflexicon)
 end
 
 # Return reflexicon to initial state
-function first!(R::Reflexicon)
-    copyto!(R, Reflexicon(R.start))
+function first!(R::ReflexiconState)
+    copyto!(R, ReflexiconState(R.start))
     R.page = 1
     return R
 end
 
 # Calculate next page in reflexicon
-function next!(R::Reflexicon)
+function next!(R::ReflexiconState)
     R.page_io = _write_out_page(R.data)
     seekstart(R.page_io)
     R.data = countmap(filter(∈(ALPHABET), read(R.page_io, String)))
