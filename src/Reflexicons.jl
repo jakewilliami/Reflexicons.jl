@@ -8,6 +8,7 @@ export copyto!, first!, next!
 
 const ALPHABET = 'a':'z'
 
+<<<<<<< HEAD
 mutable struct ReflexiconState
     start::String
     page_io::IO
@@ -24,5 +25,8 @@ end
 
 include("show.jl")
 include("mutate.jl")
+=======
+include("state.jl")
+>>>>>>> c02360b (Move Reflexicon state functions into src/state.jl)
 
 end  # end module
