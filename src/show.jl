@@ -54,5 +54,5 @@ function Base.show(io::IO, R::Reflexicon)
     # Print bottom boarder
     print(io, _PAGE_BOARDER_CHARS[:bottom_left_corner])
     print(io, _PAGE_BOARDER_CHARS[:edge_horizontal] ^ (line_width + 2))
-    println(io, _PAGE_BOARDER_CHARS[:bottom_right_corner])
+    print(io, _PAGE_BOARDER_CHARS[:bottom_right_corner])
 end
