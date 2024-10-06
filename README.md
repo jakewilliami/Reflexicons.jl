@@ -38,3 +38,13 @@ PAGE 1
 │ x │
 └───┘
 ```
+
+## Acknowledgements
+
+Thanks to Lee Sallows for correspondence on this topic, and for sharing Pascal code to find autograms.
+
+Thanks to Dillon Mayhew for discussions on this topic.
+
+## Citation
+
+If your research depends on Reflexicons.jl, please consider giving us a formal citation: [`citation.bib`](./citation.bib).
