@@ -8,7 +8,7 @@ end
 function ReflexiconState(start::String)
     page_io = IOBuffer()
     print(page_io, start)
-    return Reflexicon(start, page_io, 1, countmap(start))
+    return ReflexiconState(start, page_io, 1, countmap(start))
 end
 
 
