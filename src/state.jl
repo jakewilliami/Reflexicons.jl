@@ -1,16 +1,3 @@
-mutable struct ReflexiconState
-    start::String
-    page_io::IO
-    page::Int
-    data::Dict{Char, Int}
-end
-
-function ReflexiconState(start::String)
-    page_io = IOBuffer()
-    print(page_io, start)
-    return ReflexiconState(start, page_io, 1, countmap(start))
-end
-
 ### Display methods
 
 # Given a frequency map of characters, write out the reflexicon page
