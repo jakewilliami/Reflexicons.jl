@@ -70,7 +70,6 @@ jobs:
       - uses: julia-actions/setup-julia@latest
       - uses: extractions/setup-just@v3  # or taiki-e/install-action@just
       - uses: astral-sh/setup-uv@v6
-      - run: just fmt
 
       # Adapted from:
       #   github.com/FluxML/Flux.jl/blob/7be1ca7a/.github/workflows/JuliaFormatter.yml
