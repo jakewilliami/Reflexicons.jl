@@ -26,7 +26,7 @@ Pkg.instantiate()
 
 # Test project
 test:
-	julia --project={{project_dir}} {{test_file}}
+    julia --project={{project_dir}} -e 'import Pkg; Pkg.test()'
 
 # Run specified file
 run run_file:
