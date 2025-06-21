@@ -12,13 +12,11 @@ mutable struct ReflexiconState
     page_io::IO
     page::Int
     data::Dict{Char, Int}
+    lang::Symbol  # used by SpelledOut.jl
 end
 
-function ReflexiconState(start::String)
-    page_io = IOBuffer()
-    print(page_io, start)
-    return ReflexiconState(start, page_io, 1, countmap(start))
-end
+ReflexiconState(start::String, lang::Symbol = :en) =
+    ReflexiconState(start, IOBuffer(start), 1, countmap(start), lang)
 
 include("countmap.jl")
 include("state.jl")

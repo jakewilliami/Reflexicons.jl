@@ -1,7 +1,7 @@
 ### Display methods
 
 # Given a frequency map of characters, write out the reflexicon page
-function _write_out_page(freq::Dict{Char, Int})
+function _write_out_page(freq::Dict{Char, Int}, lang::Symbol)
     io = IOBuffer()
     chars = collect(keys(freq))
     sort!(chars)  # sort for aesthetic
@@ -9,7 +9,7 @@ function _write_out_page(freq::Dict{Char, Int})
 
     for (i, c) in enumerate(chars)
         n = freq[c]
-        print(io, spelled_out(n), ' ', c)
+        print(io, spelled_out(n, lang=lang), ' ', c)
         i == set_len || print(io, '\n')
     end
 
@@ -81,7 +81,7 @@ end
 
 # Calculate next page in reflexicon
 function next!(R::ReflexiconState)
-    R.page_io = _write_out_page(R.data)
+    R.page_io = _write_out_page(R.data, R.lang)
     seekstart(R.page_io)
     R.data = countmap(filter(∈(ALPHABET), read(R.page_io, String)))
     R.page += 1
