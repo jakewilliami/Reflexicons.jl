@@ -9,7 +9,7 @@ function _write_out_page(freq::Dict{Char, Int}, lang::Symbol)
 
     for (i, c) in enumerate(chars)
         n = freq[c]
-        print(io, spelled_out(n, lang=lang), ' ', c)
+        print(io, spelled_out(n, lang = lang), ' ', c)
         i == set_len || print(io, '\n')
     end
 
