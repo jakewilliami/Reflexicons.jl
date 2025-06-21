@@ -1,7 +1,6 @@
 module Reflexicons
 
 using SpelledOut
-using StatsBase
 
 export ReflexiconState
 export copyto!, first!, next!
@@ -21,6 +20,7 @@ function ReflexiconState(start::String)
     return ReflexiconState(start, page_io, 1, countmap(start))
 end
 
+include("countmap.jl")
 include("state.jl")
 
 end  # end module

@@ -50,6 +50,7 @@
 #   - [2]: github.com/jakewilliami/SpelledOut.jl/commit/13f2a62
 #   - [3]: github.com/jakewilliami/SpelledOut.jl/blob/09519fce/examples/self-referencing-sentence.jl
 
+using Reflexicons: countmap
 using SpelledOut
 
 const ALPHABET = 'a':'z'
@@ -58,31 +59,6 @@ const STARTING_STR = "Only a fool would check that this pangram contains "
 const ENDING_STR = ", and last but not least, exactly one !"
 const MIDDLE_STR, MIDDLE_STR_OXFORD = ", ", ", and "
 const PLURAL_STR = "s"
-
-# Own version of countmap adapted from StatsBase's countmap function:
-#   github.com/JuliaStats/StatsBase.jl/blob/dfe8945a/src/counts.jl#L433
-#     github.com/JuliaStats/StatsBase.jl/blob/dfe8945a/src/counts.jl#L270
-#       github.com/JuliaStats/StatsBase.jl/blob/dfe8945a/src/counts.jl#L272-L283
-#         github.com/JuliaStats/StatsBase.jl/blob/dfe8945a/src/counts.jl#L285-L296
-#  github.com/JuliaStats/StatsBase.jl/blob/dfe8945a/src/counts.jl#L9
-#    github.com/JuliaStats/StatsBase.jl/pull/327/commits/0cfc0090
-#
-# I'm only porting the specialised version of this function that works for me because
-# I want to efficiency of the StatsBase countmap algorithm without the extra import.
-function countmap(x::Vector{T}) where {T}
-    cm = Dict{T, Int}()
-
-    for v in x
-        i = Base.ht_keyindex2!(cm, v)
-        if i > 0
-            @inbounds cm.vals[i] += 1
-        else
-            @inbounds Base._setindex!(cm, 1, v, -i)
-        end
-    end
-
-    return cm
-end
 
 # Given a count map (i.e., Dict('a' => 3, 'b' => 1, ...)), construct the reflexicon
 # ("This sentence contains n 'a's. n 'b's, ...").  This may or may not be an autogram.
