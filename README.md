@@ -13,7 +13,7 @@ For more information on reflexicons more eloquently, see Lee Sallows' [article o
 
 ## Quick Start
 
-```julia
+```julia-repl
 julia> using Reflexicons
 
 julia> R = ReflexiconState("x")  # construct a reflexicon with an initial state
